@@ -13,7 +13,7 @@ class Blog(db.Model):
     title = db.Column(db.String(120))
     body = db.Column(db.String(5000))
 
-    def __init__(self):
+    def __init__(self, title):
         self.title = title
         self.blog = False
 
@@ -30,4 +30,9 @@ def index():
 
 
     return render_template('build-a-blog.html',title="Building a Blog")
+
+
+
+if __name__ == "__main__":
+    app.run()
 
