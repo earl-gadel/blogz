@@ -31,6 +31,11 @@ def index():
 
     return render_template('build-a-blog.html',title="Building a Blog")
 
+@app.route('/blog', methods=['POST', 'GET'])
+def blog():
+    if request.method == 'GET':
+        return render_template('build-a-blog.html',title="Building a Blog")
+
 
 
 if __name__ == "__main__":
