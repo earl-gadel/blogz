@@ -7,11 +7,13 @@
         <label>
             Title for your new blog:
             <input type="text" name='title' />
+            <span class="error">{{error_title}}</span>
             <input type="hidden" value='Add Title' />
         </label>
         <label>
             Your new blog:
             <input class="box" type="text" name="body" />
+            <span class="error">{{error_body}}</span>
             <input type="hidden" name="blog-id" value="" />
         </label>
             <input type="submit" value="Add Entry" />
