@@ -26,7 +26,8 @@ def index():
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    blog_post = Blog.query.all()
+    blog_id = request.args.get('id')
+    blog_post = Blog.query.get(blog_id)
 
     return render_template('blog-entry.html',title="Blog Post", blog_post=blog_post)
 
@@ -47,7 +48,8 @@ def new_post():
             new_blog = Blog(blog_title, blog_body)
             db.session.add(new_blog)
             db.session.commit()
-            return redirect("/")
+            blog_id = Blog.query.get(new_blog.id)
+            return redirect("/blog?id={}".format(blog_id))
 
         return render_template('add-entry.html', title="Create New Post",
                            error_title=error_title, error_body=error_body,

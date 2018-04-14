@@ -6,7 +6,7 @@
 
     {% if blog_posts|length == 0 %}
 
-    <p>No tasks yet</p>
+    <p>No blogs yet</p>
 
     {% endif %}
 
@@ -14,7 +14,7 @@
 
     <ul>
         {% for post in blog_posts %}
-        <h2>{{post.title}}</h2>
+        <h2><a href="/blog?id={{post.id}}" name="id">{{post.title}}</a></h2>
         <p>{{post.body}}</p>
         <hr />
         {% endfor %}
