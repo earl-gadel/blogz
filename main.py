@@ -36,20 +36,24 @@ def blog():
 def new_post():
     error_title = ""
     error_body = ""
+    if request.method == 'GET':
+        return render_template('add-entry.html', title="Create New Post")
     if request.method == 'POST':
         blog_title = request.form['title']
         blog_body = request.form['body']
-        if blog_body == "":
-            error_body = "Please fill in the body"
         if blog_title == "":
             error_title = "Please fill in the title"
-            return render_template('add-entry.html', error_title=error_title, error_body=error_body)
-        new_blog = Blog(blog_title, blog_body)
-        db.session.add(new_blog)
-        db.session.commit()
-        return redirect("/")
+        if blog_body == "":
+            error_body = "Please fill in the body"
+        if error_title == error_body == "":
+            new_blog = Blog(blog_title, blog_body)
+            db.session.add(new_blog)
+            db.session.commit()
+            return redirect("/")
 
-    return render_template('add-entry.html', title="Create New Post")
+        return render_template('add-entry.html', title="Create New Post",
+                           error_title=error_title, error_body=error_body,
+                           blog_title=blog_title, blog_body=blog_body)
 
 
 
