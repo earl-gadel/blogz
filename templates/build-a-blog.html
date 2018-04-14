@@ -2,20 +2,10 @@
 
 {% block content %}
 
-    <h3 class="inline-text">
-        <a href="/blog">Main Blog Page</a>
-    </h3>
-    <h3 class="inline-text">
-        <a href="/newpost">Add a Blog Entry</a>
-    </h3>
+    <h1 class="center-text">Build a Blog</h1>
 
-    <h1>Build a Blog</h1>
+    {% if blog_posts|length == 0 %}
 
-
-
-    <hr />
-
-    {% if tasks|length == 0 %}
     <p>No tasks yet</p>
     {% else %}
 
@@ -32,13 +22,13 @@
 
     {% endif %}
 
-    <hr />
-
-    <h2>Completed</h2>
+    <h2>New Blog Posts</h2>
 
     <ul>
-        {% for task in completed_tasks %}
-        <li>{{task.name}}</li>
+        {% for post in blog_posts %}
+        <h2>{{post.title}}</h2>
+        <p>{{post.body}}</p>
+        <hr />
         {% endfor %}
     </ul>
 
