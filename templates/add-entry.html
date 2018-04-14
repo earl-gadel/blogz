@@ -3,7 +3,7 @@
 {% block content %}
 
     <h1 class="center-text">Add a Blog Entry</h1>
-    <form method='POST'>
+    <form method='POST' id="blog">
         <label>
             Title for your new blog:
             <input type="text" name='title' value="{{blog_title}}" />
@@ -12,9 +12,8 @@
         </label>
         <label>
             Your new blog:
-            <input class="box" type="text" name="body" value="{{blog_body}}"/>
+            <textarea class="box" type="text" name="body" form="blog">{{blog_body}}</textarea>
             <span class="error">{{error_body}}</span>
-            <input type="hidden" name="blog-id" value="" />
         </label>
             <input type="submit" value="Add Entry" />
     </form>
