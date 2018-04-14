@@ -23,12 +23,6 @@ def index():
         blog_posts = Blog.query.all()
 
     #if request.method == 'POST':
-        #blog_title = request.form['title']
-        #blog_body = request.form['body']
-        #new_blog = Blog(blog_title, blog_body)
-        #db.session.add(new_blog)
-        #db.session.commit()
-
 
         return render_template('build-a-blog.html',title="Building a Blog", blog_posts=blog_posts)
 

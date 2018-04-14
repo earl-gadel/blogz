@@ -7,18 +7,6 @@
     {% if blog_posts|length == 0 %}
 
     <p>No tasks yet</p>
-    {% else %}
-
-        <ul>
-            {% for task in tasks %}
-            <li>{{blog.title}}
-                <form method="POST" action="/blog">
-
-
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
 
     {% endif %}
 
