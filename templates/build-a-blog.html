@@ -10,13 +10,8 @@
     </h3>
 
     <h1>Build a Blog</h1>
-    <form method='post'>
-        <label>
-            New Task:
-            <input type="text" name='task' />
-        </label>
-        <input type="submit" value='Add Task' />
-    </form>
+
+
 
     <hr />
 
@@ -26,10 +21,10 @@
 
         <ul>
             {% for task in tasks %}
-            <li>{{task.name}}
-                <form method="POST" action="/delete-task" style="display:inline-block;">
-                    <input type="hidden" name="task-id" value="{{task.id}}" />
-                    <input type="submit" value="Done!" />
+            <li>{{blog.title}}
+                <form method="POST" action="/blog">
+
+
                 </form>
             </li>
             {% endfor %}

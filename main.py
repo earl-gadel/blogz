@@ -36,6 +36,12 @@ def blog():
     if request.method == 'GET':
         return render_template('build-a-blog.html',title="Building a Blog")
 
+@app.route('/newpost', methods=['POST', 'GET'])
+def new_post():
+    return render_template('add-entry.html', title="Building a Blog")
+
+
+
 
 
 if __name__ == "__main__":

@@ -5,3 +5,7 @@
     display: inline-block;
     margin: 10px;
 }
+.box {
+    height: 200px;
+    width: 400px;
+}
