@@ -6,13 +6,14 @@
     <form method='POST' id="blog">
         <label>
             Title for your new blog:
+            <br>
             <input type="text" name='title' value="{{blog_title}}" />
             <span class="error">{{error_title}}</span>
-            <input type="hidden" value='Add Title' />
         </label>
         <br>
         <label>
             Your new blog:
+            <br>
             <textarea class="box" type="text" name="body" form="blog">{{blog_body}}</textarea>
             <span class="error">{{error_body}}</span>
         </label>

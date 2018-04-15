@@ -56,9 +56,6 @@ def new_post():
                            blog_title=blog_title, blog_body=blog_body)
 
 
-
-
-
 if __name__ == "__main__":
     app.run()
 
