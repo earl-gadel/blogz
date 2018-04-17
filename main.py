@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -66,6 +66,27 @@ def new_post():
         return render_template('add-entry.html', title="Create New Post",
                            error_title=error_title, error_body=error_body,
                            blog_title=blog_title, blog_body=blog_body)
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user and user.password == password:
+            session['username'] = username
+            flash('Logged in')
+            return redirect('/newpost')
+        else:
+            flash('User password incorrect, or user does not exist', 'error')
+
+        return render_template('login.html')
+
+    return render_template('login.html')
+
+
+
+
 
 
 if __name__ == "__main__":
