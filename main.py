@@ -6,6 +6,7 @@ app.config['Debug'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogz@localhost:3306/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+app.secret_key = 'anotherkey'
 
 class Blog(db.Model):
 
@@ -79,8 +80,6 @@ def login():
             return redirect('/newpost')
         else:
             flash('User password incorrect, or user does not exist', 'error')
-
-        return render_template('login.html')
 
     return render_template('login.html')
 
