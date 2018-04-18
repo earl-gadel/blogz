@@ -2,4 +2,38 @@
 
 {% block content %}
 
+	<h1>Signup</h1>
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="username">Username</label>
+                </td>
+                <td>
+                    <input name="username" value="{{username}}" type="text" />
+                    <span class="error">{{error_user}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password</label>
+                </td>
+                <td>
+                    <input name="password" type="password" />
+                    <span class="error">{{error_pass}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="verify_pass">Verify Passsword</label>
+                </td>
+                <td>
+                    <input name="verify_pass" type="password" />
+                    <span class="error">{{error_verify}}</span>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit" />
+</form>
+
 {% endblock %}

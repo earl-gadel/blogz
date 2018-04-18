@@ -83,7 +83,42 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
+    error_user = ''
+    error_pass = ''
+    error_verify = ''
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        verify_pass = request.form['verify_pass']
 
+        for i in username:
+            if i == '':
+                error_user = "That's not a valid username"
+            elif i == ' ':
+                error_user = "That's not a valid username"
+
+        if len(username) < 3:
+            error_user = "That's not a valid username"
+
+        for i in password:
+            if i == '':
+                error_pass = "That's not a valid password"
+            elif i == ' ':
+                error_pass = "That's not a valid password"
+
+        if len(password) < 3:
+            error_pass = "That's not a valid password"
+
+        if verify_pass != password or len(verify_pass) < 3:
+            error_verify = "Passwords don't match"
+
+        if error_user == error_verify == error_pass == '':
+            return render_template('welcome.html', username=username)
+        return render_template('signup.html', error_user=error_user, error_pass=error_pass,
+                               error_verify=error_verify, username=username)
+    return render_template('signup.html')
 
 
 
