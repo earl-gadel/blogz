@@ -88,11 +88,15 @@ def signup():
     error_user = ''
     error_pass = ''
     error_verify = ''
+    error_existing = ''
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         verify_pass = request.form['verify_pass']
+        existing_user = User.query.filter_by(username=username).first()
 
+        if existing_user is not None:
+            error_existing = 'User account already exists'
         for i in username:
             if i == '':
                 error_user = "That's not a valid username"
@@ -114,10 +118,11 @@ def signup():
         if verify_pass != password or len(verify_pass) < 3:
             error_verify = "Passwords don't match"
 
-        if error_user == error_verify == error_pass == '':
-            return render_template('welcome.html', username=username)
+        if error_user == error_verify == error_pass == error_existing == '':
+
+            return render_template('add-entry.html', username=username)
         return render_template('signup.html', error_user=error_user, error_pass=error_pass,
-                               error_verify=error_verify, username=username)
+                               error_verify=error_verify, error_existing=error_existing, username=username)
     return render_template('signup.html')
 
 
