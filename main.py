@@ -34,26 +34,26 @@ class User(db.Model):
 @app.before_request
 def require_login():
     allowed_routes = ['login', 'signup', 'blog', 'index']
-    if request.endpoint not in allowed_routes and 'email' not in session:
+    if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    blog_posts = Blog.query.all()
+    users = User.query.all()
 
-    return render_template('build-a-blog.html',title="Blogz", blog_posts=blog_posts)
+    return render_template('index.html',title="Blogz", users=users)
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    blog_id = request.args.get('id')
-    blog_post = Blog.query.get(blog_id)
+    blog_posts = Blog.query.all()
 
-    return render_template('blog-entry.html',title="Blog Post", blog_post=blog_post)
+    return render_template('build-a-blog.html',title="Blogz", blog_posts=blog_posts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
     error_title = ""
     error_body = ""
+    owner = User.query.filter_by(username=session['username']).first()
     if request.method == 'GET':
         return render_template('add-entry.html', title="Create New Post")
     if request.method == 'POST':
@@ -64,7 +64,7 @@ def new_post():
         if blog_body == "":
             error_body = "Please fill in the body"
         if error_title == error_body == "":
-            new_blog = Blog(blog_title, blog_body)
+            new_blog = Blog(blog_title, blog_body, owner)
             db.session.add(new_blog)
             db.session.commit()
             blog_id = new_blog.id
@@ -138,7 +138,7 @@ def signup():
 @app.route('/logout')
 def logout():
     del session['username']
-    return redirect('/')
+    return redirect('/blog')
 
 
 
