@@ -119,6 +119,10 @@ def signup():
             error_verify = "Passwords don't match"
 
         if error_user == error_verify == error_pass == error_existing == '':
+            new_user = User(username, password)
+            db.session.add(new_user)
+            db.session.commit()
+            session['username'] = username
 
             return render_template('add-entry.html', username=username)
         return render_template('signup.html', error_user=error_user, error_pass=error_pass,
