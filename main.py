@@ -137,14 +137,12 @@ def signup():
                                error_verify=error_verify, error_existing=error_existing, username=username)
     return render_template('signup.html')
 
+
 @app.route('/logout')
 def logout():
     del session['username']
     return redirect('/blog')
 
 
-
-
 if __name__ == "__main__":
     app.run()
-
