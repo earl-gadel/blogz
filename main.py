@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['Debug'] = True
@@ -14,11 +15,15 @@ class Blog(db.Model):
     title = db.Column(db.String(120))
     body = db.Column(db.String(5000))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pub_date = db.Column(db.DateTime)
 
-    def __init__(self, title, body, owner):
+    def __init__(self, title, body, owner, pub_date=None):
         self.title = title
         self.body = body
         self.owner = owner
+        if pub_date is None:
+            pub_date = datetime.utcnow()
+        self.pub_date = pub_date
 
 class User(db.Model):
 
@@ -132,7 +137,7 @@ def signup():
             db.session.commit()
             session['username'] = username
 
-            return render_template('add-entry.html', username=username)
+            return redirect('/newpost')
         return render_template('signup.html', error_user=error_user, error_pass=error_pass,
                                error_verify=error_verify, error_existing=error_existing, username=username)
     return render_template('signup.html')
@@ -141,7 +146,7 @@ def signup():
 @app.route('/logout')
 def logout():
     del session['username']
-    return redirect('/blog')
+    return redirect('/')
 
 
 if __name__ == "__main__":
