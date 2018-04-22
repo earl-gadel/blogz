@@ -2,9 +2,8 @@
 
 {% block content %}
     <ul>
-    {% for post in blog_posts %}
-        <h2><a href="/?user={{user.id}}" name="id">{{users.username}}</a></h2>
-            <p>{{post.body}}</p>
+    {% for user in users %}
+        <h2><a href="/blog" name="user">{{user.username}}</a></h2>
         <hr />
     {% endfor %}
     </ul>
