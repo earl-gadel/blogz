@@ -53,7 +53,7 @@ def blog():
     blog_id = request.args.get('id')
     blog_post = Blog.query.get(blog_id)
     #blog_posts = Blog.query.all()
-    return render_template('blog-entry.html',title="New Post", blog_post=blog_post)
+    return render_template('blog-entry.html',title="Just Posted!", blog_post=blog_post)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():

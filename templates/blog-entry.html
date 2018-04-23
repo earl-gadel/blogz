@@ -2,7 +2,16 @@
 
 {% block content %}
 
-    <h1 class="center-text">{{blog_post.title}}</h1>
-    <p>{{blog_post.body}}</p>
+    <div class="w3-card-4 w3-margin w3-white">
+        <div class="w3-container">
+        <h3><b>{{blog_post.title}}</b></h3>
+        <h5 class="w3-opacity">April 2, 2014</h5>
+        </div>
+
+        <div class="w3-container">
+        <p>{{blog_post.body}}</p>
+
+        </div>
+    </div>
 
 {% endblock %}
