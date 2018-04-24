@@ -6,7 +6,7 @@
         <div class="w3-container">
         {% for post in blog_posts %}
         <h3><b>
-            <a href="/blog?id={{}}">{{post.title}}</a>
+            <a href="/blog?id={{post.id}}">{{post.title}}</a>
         </b></h3>
         <h5 class="w3-opacity">{{post.pub_date}}</h5>
         </div>
@@ -17,7 +17,7 @@
                 <div class="w3-col m8 s12">
                 <p>
                 Written by
-                <a href="/blog?user={{post.owner_id}}">{{username}}</a>
+                <a href="/blog?user={{post.owner_id}}">{{post.owner.username}}</a>
                 </p>
                 </div>
             </div>
