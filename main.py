@@ -45,15 +45,15 @@ def require_login():
 @app.route('/', methods=['GET'])
 def index():
     users = User.query.all()
-
     return render_template('index.html',title="Blogz", users=users)
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    blog_id = request.args.get('id')
-    blog_post = Blog.query.get(blog_id)
-    #blog_posts = Blog.query.all()
-    return render_template('blog-entry.html',title="Just Posted!", blog_post=blog_post)
+    #blog_id = request.args.get('id')
+    #blog_post = Blog.query.get(blog_id)
+    blog_posts = Blog.query.all()
+    username = User.query.filter_by(id=blog.owner_id).first().username
+    return render_template('blog-entry.html',title="Just Posted!", blog_posts=blog_posts, username=username)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
@@ -146,7 +146,7 @@ def signup():
 @app.route('/logout')
 def logout():
     del session['username']
-    return redirect('/')
+    return redirect('/blog')
 
 
 if __name__ == "__main__":
