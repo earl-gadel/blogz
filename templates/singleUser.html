@@ -9,4 +9,26 @@
 
 {% block content %}
 
+        {% for post in user_posts %}
+    <div class="w3-card-4 w3-margin w3-white">
+        <div class="w3-container">
+            <h3><b>
+                <a href="/blog?id={{post.id}}">{{post.title}}</a>
+            </b></h3>
+            <h5 class="w3-opacity">{{post.pub_date}}</h5>
+        </div>
+        <div class="w3-container">
+            <p>{{post.body}}</p>
+            <div class="w3-row">
+                <div class="w3-col m8 s12">
+                    <p>
+                    Written by
+                    <a href="/blog?user={{post.owner_id}}">{{post.owner.username}}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+
 {% endblock %}
