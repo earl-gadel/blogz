@@ -3,8 +3,8 @@
 {% block content %}
 
     <div class="w3-card-4 w3-margin w3-white">
-        <div class="w3-container">
         {% for post in blog_posts %}
+        <div class="w3-container">
             <h3><b>
                 <a href="/blog?id={{post.id}}">{{post.title}}</a>
             </b></h3>
