@@ -7,6 +7,7 @@
     <title>Blogz!</title>
         <h3 class="inline-text">
             <a href="/">Main Blog Page</a>
+            <a href="/blog">All Blog Posts</a>
             <a href="/newpost">Add a Blog Entry</a>
             <a href="/login">Login</a>
             <a href="/signup">Create New Account</a>
@@ -23,7 +24,7 @@
 
     {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
-        {% for category in messages %}
+        {% for category,message in messages %}
             <li class="{{category}}">{{message}}</li>
         {% endfor %}
         </ul>
