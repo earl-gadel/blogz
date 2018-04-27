@@ -54,19 +54,17 @@ def index():
 def blog():
     user_id = request.args.get('user', None)
     blog_id = request.args.get('id', None)
-    #user_posts = ""
 
     if user_id is None and blog_id is None:
         blog_posts = Blog.query.all()
         return render_template('blog-entry.html', title="All Posted!", blog_posts=blog_posts)
     elif user_id is not None:
         user_posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template('singleUser.html', user_posts=user_posts)
+        user_name = User.query.filter_by(user_name=user_name).first()
+        return render_template('singleUser.html', title="user_name.username", user_posts=user_posts)
     else:
         new_post = Blog.query.filter_by(id=blog_id).all()
-        return render_template('blog-entry.html', new_post=new_post)
-    #print(user_posts)
-    #print(new_post)
+        return render_template('blog-entry.html', title="Just Posted!" new_post=new_post)
     return render_template('blog-entry.html',title="Just Posted!", blog_posts=blog_posts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -164,4 +162,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
