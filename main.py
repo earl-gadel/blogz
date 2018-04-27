@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from hashutils import make_pw_hash, check_pw_hash
 
 app = Flask(__name__)
 app.config['Debug'] = True
@@ -29,12 +30,12 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120))
+    pw_hash = db.Column(db.String(120))
     blogs = db.relationship('Blog', backref='owner')
 
     def __init__(self, username, password):
         self.username = username
-        self. password = password
+        self.pw_hash = make_pw_hash(password)
 
 
 @app.before_request
@@ -60,11 +61,11 @@ def blog():
         return render_template('blog-entry.html', title="All Posted!", blog_posts=blog_posts)
     elif user_id is not None:
         user_posts = Blog.query.filter_by(owner_id=user_id).all()
-        user_name = User.query.filter_by(user_name=user_name).first()
-        return render_template('singleUser.html', title="user_name.username", user_posts=user_posts)
+        #user_name = User.query.filter_by(user_name=user_name).first()
+        return render_template('singleUser.html', title="User Posts", user_posts=user_posts)
     else:
         new_post = Blog.query.filter_by(id=blog_id).all()
-        return render_template('blog-entry.html', title="Just Posted!" new_post=new_post)
+        return render_template('blog-entry.html', title="Just Posted!", new_post=new_post)
     return render_template('blog-entry.html',title="Just Posted!", blog_posts=blog_posts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -99,7 +100,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
-        if user and user.password == password:
+        if user and check_pw_hash(password, user.pw_hash):
             session['username'] = username
             flash('Logged in')
             return redirect('/newpost')
@@ -162,4 +163,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
