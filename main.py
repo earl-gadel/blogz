@@ -53,7 +53,7 @@ def index():
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
     user_id = request.args.get('user', None)
-    blog_id = request.args.get('blog', None)
+    blog_id = request.args.get('id', None)
     #user_posts = ""
 
     if user_id is None and blog_id is None:
@@ -63,6 +63,7 @@ def blog():
         user_posts = Blog.query.filter_by(owner_id=user_id).all()
         return render_template('singleUser.html', user_posts=user_posts)
     else:
+        new_post = Blog.query.filter_by(id=blog_id).all()
         return render_template('blog-entry.html', new_post=new_post)
     #print(user_posts)
     #print(new_post)
