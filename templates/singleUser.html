@@ -8,7 +8,7 @@
             <h3><b>
                 <a href="/blog?id={{post.id}}">{{post.title}}</a>
             </b></h3>
-            <h5 class="w3-opacity">{{post.pub_date}}</h5>
+            <h5 class="w3-opacity">{{post.pub_date.strftime('%m-%d-%Y')}}</h5>
         </div>
         <div class="w3-container">
             <p>{{post.body}}</p>
