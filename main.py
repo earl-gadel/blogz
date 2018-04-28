@@ -61,12 +61,12 @@ def blog():
         return render_template('blog-entry.html', title="All Posted!", blog_posts=blog_posts)
     elif user_id is not None:
         user_posts = Blog.query.filter_by(owner_id=user_id).all()
-        #user_name = User.query.filter_by(user_name=user_name).first()
-        return render_template('singleUser.html', title="User Posts", user_posts=user_posts)
+        user_name = User.query.filter_by(id=user_id).first()
+        post_owner = user_name.username
+        return render_template('singleUser.html', title="{}'s Posts".format(post_owner), user_posts=user_posts)
     else:
         new_post = Blog.query.filter_by(id=blog_id).all()
         return render_template('blog-entry.html', title="Just Posted!", new_post=new_post)
-    return render_template('blog-entry.html',title="Just Posted!", blog_posts=blog_posts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
