@@ -2,8 +2,10 @@ from flask import Flask, request, redirect, render_template, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from hashutils import make_pw_hash, check_pw_hash
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+Bootstrap(app)
 app.config['Debug'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogz@localhost:3306/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
