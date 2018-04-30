@@ -1,6 +1,7 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
+
     <ul>
     {% for user in users %}
         <h2><a href="/blog?user={{user.id}}" name="user">{{user.username}}</a></h2>
