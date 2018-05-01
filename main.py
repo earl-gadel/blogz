@@ -45,7 +45,7 @@ def require_login():
     allowed_routes = ['login', 'signup', 'blog', 'index']
     if request.endpoint not in allowed_routes \
         and 'username' not in session \
-        and '/static/' not in request.path:
+        and '/static' not in request.path:
         return redirect('/login')
 
 @app.route('/', methods=['GET'])
@@ -165,4 +165,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='192.168.1.107')
