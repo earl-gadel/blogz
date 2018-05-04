@@ -3,21 +3,16 @@
 {% block content %}
 
 <form action="/login" method="post">
-    <table>
-        <tr>
-            <td><label for="username">Username</label></td>
-            <td>
-                <input name="username" type="text" value="{{ username }}">
-            </td>
-        </tr>
-        <tr>
-            <td><label for="password">Password</label></td>
-            <td>
-                <input name="password" type="password">
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Login">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input name="username" class="form-control" type="text" value="{{ username }}">
+        <label for="password">Password</label>
+    </div>
+    <div class="form-group">
+        <input name="password" type="password">
+        <input type="submit" class="form-control" value="Login">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 {% endblock %}
